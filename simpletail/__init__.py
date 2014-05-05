@@ -1,6 +1,5 @@
 from locale import getpreferredencoding
-
-import six
+import sys
 
 
 class ropen(object):
@@ -20,7 +19,7 @@ class ropen(object):
         self.newline = newline
 
         kwargs = {}
-        if six.PY3:
+        if sys.version_info[0] >= 3:
             kwargs['closefd'] = closefd
         self.fileobject = open(filename, 'rb', buffering=bufsize, **kwargs)
 
