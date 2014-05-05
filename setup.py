@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="simpletail",
-    version="0.1.0",
+    version="0.1.1",
     license="GPL3",
     description="Read file in reverse order",
     author="Antonis Christofides",
