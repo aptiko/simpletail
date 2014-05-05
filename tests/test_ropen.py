@@ -40,7 +40,7 @@ class RopenTestCase(TestCase):
 
     def test_utf_noeol(self):
         filename = os.path.join('tests', 'data', 'utf_noeol.txt')
-        with ropen(filename) as f:
+        with ropen(filename, encoding='utf8') as f:
             if six.PY2:
                 self._check_utf(f.next(), 8, ' 7')
                 self._check_utf(f.next(), 9, ' 6\n')
@@ -61,7 +61,7 @@ class RopenTestCase(TestCase):
 
     def test_utf_noeol_small_buffer(self):
         filename = os.path.join('tests', 'data', 'utf_noeol.txt')
-        with ropen(filename, bufsize=3) as f:
+        with ropen(filename, encoding='utf8', bufsize=3) as f:
             if six.PY2:
                 self._check_utf(f.next(), 8, ' 7')
                 self._check_utf(f.next(), 9, ' 6\n')
