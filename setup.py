@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 kwargs = {
     'name': "simpletail",
-    'version': "dev",
+    'version': "0.1.0",
     'license': "GPL3",
     'description': "Read file in reverse order",
     'author': "Antonis Christofides",
