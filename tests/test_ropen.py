@@ -21,6 +21,18 @@ class RopenTestCase(TestCase):
             self.assertEqual(f.next(), 'Line 1\n')
             self.assertRaises(StopIteration, f.next)
 
+    def test_simple_readline(self):
+        filename = os.path.join('tests', 'data', 'simple.txt')
+        with ropen(filename) as f:
+            self.assertEqual(f.readline(), 'Line 7\n')
+            self.assertEqual(f.readline(), 'Line 6\n')
+            self.assertEqual(f.readline(), 'Line 5\n')
+            self.assertEqual(f.readline(), 'Line 4\n')
+            self.assertEqual(f.readline(), 'Line 3\n')
+            self.assertEqual(f.readline(), 'Line 2\n')
+            self.assertEqual(f.readline(), 'Line 1\n')
+            self.assertRaises(StopIteration, f.next)
+
     def test_small_buffer(self):
         filename = os.path.join('tests', 'data', 'simple.txt')
         with ropen(filename, bufsize=3) as f:
