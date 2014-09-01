@@ -2,6 +2,10 @@
 simpletail - Read a file backwards
 ==================================
 
+.. image:: https://travis-ci.org/aptiko/simpletail.svg?branch=master
+    :alt: Build button
+    :target: https://travis-ci.org/aptiko/simpletail
+
 Before we go into technical details, a note about the license: It's
 GPLv3. This practically means that if you use this module, your
 program needs to be GPLv3. Sorry about that.
