@@ -9,10 +9,14 @@ setup(
     license="GPL3",
     description="Read file in reverse order",
     author="Antonis Christofides",
-    author_email="anthony@itia.ntua.gr",
+    author_email="antonis@antonischristofides.com",
     url="https://github.com/aptiko/simpletail",
     packages=find_packages(),
     test_suite="tests",
-    install_requires=[
+    classifiers=[
+        "Development Status :: 5 - Production/Stable",
+        ("License :: OSI Approved :: GNU General Public License "
+         "v3 or later (GPLv3+)"),
+        "Topic :: Text Processing :: General",
     ],
 )

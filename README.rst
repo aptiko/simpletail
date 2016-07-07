@@ -6,9 +6,19 @@ simpletail - Read a file backwards
     :alt: Build button
     :target: https://travis-ci.org/aptiko/simpletail
 
-Before we go into technical details, a note about the license: It's
-GPLv3. This practically means that if you use this module, your
-program needs to be GPLv3. Sorry about that.
+.. image:: https://codecov.io/github/aptiko/simpletail/coverage.svg?branch=master
+    :alt: Coverage
+    :target: https://codecov.io/gh/aptiko/simpletail
+
+.. image:: https://img.shields.io/pypi/l/simpletail.svg
+    :alt: License
+
+.. image:: https://img.shields.io/pypi/status/simpletail.svg
+    :alt: Status
+
+.. image:: https://img.shields.io/pypi/v/simpletail.svg
+    :alt: Latest version
+    :target: https://pypi.python.org/pypi/simpletail
 
 Briefly, the following will print ``my_file`` backwards::
 
@@ -46,9 +56,7 @@ exception of *closefd*, which is ignored in Python 2.
 License
 =======
 
-Written by Antonis Christofides.
-
-Copyright (C) 2014 TEI of Epirus
+Copyright (C) 2014-2016 Antonis Christofides
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
