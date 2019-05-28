@@ -30,7 +30,7 @@ Briefly, the following will print ``my_file`` backwards::
        for line in f:
            sys.stdout.write(line)
 
-It will work on Unix. It will work on Windows. On Python 2 and 3. It
+It will work on Unix. It will work on Windows. It
 will work regardless what kind of line endings you have. It should
 work with any file encoding (but you need to specify an encoding, see
 below), but I'm not certain about that; if in your encoding there are
@@ -50,13 +50,12 @@ in Python 3 it can be anything ``open()`` accepts as a first argument
 (however wrapping files opened in text mode will probably not work).
 The file is read from the end in chunks of size *bufsize*. The rest of
 the arguments have the meaning they have in the ``open()`` built-in
-function of Python 3, but they will also work in Python 2, with the
-exception of *closefd*, which is ignored in Python 2.
+function.
 
 License
 =======
 
-Copyright (C) 2014-2016 Antonis Christofides
+Copyright (C) 2014-2019 Antonis Christofides
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
