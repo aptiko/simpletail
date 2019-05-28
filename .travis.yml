@@ -4,10 +4,13 @@ python:
  - "3.6"
 
 install:
- - pip install codecov
+ - pip install black isort flake8 codecov
 
 script:
- - coverage run setup.py test
+ - black --check .
+ - flake8 --max-line-length=88 .
+ - isort --recursive --check-only --diff .
+ - coverage run --omit="*/tests/*" setup.py test
 
 after_success:
  - codecov

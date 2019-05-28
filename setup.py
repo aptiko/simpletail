@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
-from setuptools import setup, find_packages
-
+from setuptools import find_packages, setup
 
 setup(
     name="simpletail",
@@ -15,8 +14,7 @@ setup(
     test_suite="tests",
     classifiers=[
         "Development Status :: 5 - Production/Stable",
-        ("License :: OSI Approved :: GNU General Public License "
-         "v3 or later (GPLv3+)"),
+        "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
         "Topic :: Text Processing :: General",
     ],
 )

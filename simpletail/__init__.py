@@ -1,30 +1,35 @@
-from locale import getpreferredencoding
 import sys
+from locale import getpreferredencoding
 
 
 class ropen(object):
-
-    def __init__(self, filename, bufsize=4096, encoding=None, errors=None,
-                 newline=None, closefd=True):
+    def __init__(
+        self,
+        filename,
+        bufsize=4096,
+        encoding=None,
+        errors=None,
+        newline=None,
+        closefd=True,
+    ):
         if bufsize <= 2:
-            raise ValueError("{} is not a serious buffer size"
-                             .format(bufsize))
+            raise ValueError("{} is not a serious buffer size".format(bufsize))
         self.bufsize = bufsize
 
         # seek() and tell() don't work well in text files, at least not in
         # Python 3; they need to read all the file and make conversions.
         # We thus open the file in binary mode and make conversions later.
         self.encoding = encoding if encoding else getpreferredencoding()
-        self.errors = errors if errors else 'strict'
+        self.errors = errors if errors else "strict"
         self.newline = newline
 
         kwargs = {}
         if sys.version_info[0] >= 3:
-            kwargs['closefd'] = closefd
-        self.fileobject = open(filename, 'rb', buffering=bufsize, **kwargs)
+            kwargs["closefd"] = closefd
+        self.fileobject = open(filename, "rb", buffering=bufsize, **kwargs)
 
         self.fileobject.seek(0, 2)  # Go to end of file
-        self.buf = b''
+        self.buf = b""
 
     def close(self):
         self.fileobject.close()
@@ -41,16 +46,17 @@ class ropen(object):
     def __next__(self):
         next_line = self.get_next_undecoded_line()
         if self.newline is None:
-            next_line = next_line.replace(b'\r\n', b'\n')
-            next_line = next_line.replace(b'\r', b'\n')
+            next_line = next_line.replace(b"\r\n", b"\n")
+            next_line = next_line.replace(b"\r", b"\n")
         return next_line.decode(self.encoding, self.errors)
+
     next = __next__  # Python 2 compatibility
 
     def readline(self):
         try:
             return self.__next__()
         except StopIteration:
-            return ''
+            return ""
 
     def get_next_undecoded_line(self):
         start_of_line = self.get_start_of_line()
@@ -67,25 +73,32 @@ class ropen(object):
         if it returns zero, meaning the line starts at the beginning of the
         buffer, the caller should then fetch more data and retry.
         """
-        if self.newline in ('\r', '\n', '\r\n'):
-            return self.buf.rfind(self.newline.encode('ascii'), 0, -1) + 1
+        if self.newline in ("\r", "\n", "\r\n"):
+            return self.buf.rfind(self.newline.encode("ascii"), 0, -1) + 1
         if self.newline:
-            raise ValueError(r"ropen newline argument must be one of "
-                             r"None, '', '\r', '\n', '\r\n'.")
+            raise ValueError(
+                r"ropen newline argument must be one of "
+                r"None, '', '\r', '\n', '\r\n'."
+            )
 
         # self.newline is None or ''; universal newlines mode
         end_of_search = -1
-        if len(self.buf) >= 2 and self.buf[-2:] == b'\r\n':
+        if len(self.buf) >= 2 and self.buf[-2:] == b"\r\n":
             end_of_search = -2
-        return max(self.buf.rfind(b'\n', 0, end_of_search),
-                   self.buf.rfind(b'\r', 0, end_of_search)) + 1
+        return (
+            max(
+                self.buf.rfind(b"\n", 0, end_of_search),
+                self.buf.rfind(b"\r", 0, end_of_search),
+            )
+            + 1
+        )
 
     def read_next_into_buf(self):
         """Read data from the file in self.bufsize chunks until we're
            certain we have a full line in the buffer.
         """
         file_pos = self.fileobject.tell()
-        if (file_pos == 0) and (self.buf == b''):
+        if (file_pos == 0) and (self.buf == b""):
             raise StopIteration
         while file_pos and (self.get_start_of_line() == 0):
             bytes_to_read = min(self.bufsize, file_pos)
