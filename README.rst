@@ -10,12 +10,6 @@ simpletail - Read a file backwards
     :alt: Coverage
     :target: https://codecov.io/gh/aptiko/simpletail
 
-.. image:: https://img.shields.io/pypi/l/simpletail.svg
-    :alt: License
-
-.. image:: https://img.shields.io/pypi/status/simpletail.svg
-    :alt: Status
-
 .. image:: https://img.shields.io/pypi/v/simpletail.svg
     :alt: Latest version
     :target: https://pypi.python.org/pypi/simpletail
