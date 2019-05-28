@@ -44,8 +44,13 @@ class ropen(object):
             next_line = next_line.replace(b'\r\n', b'\n')
             next_line = next_line.replace(b'\r', b'\n')
         return next_line.decode(self.encoding, self.errors)
-    readline = __next__
     next = __next__  # Python 2 compatibility
+
+    def readline(self):
+        try:
+            return self.__next__()
+        except StopIteration:
+            return ''
 
     def get_next_undecoded_line(self):
         start_of_line = self.get_start_of_line()
