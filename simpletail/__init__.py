@@ -1,4 +1,3 @@
-import sys
 from locale import getpreferredencoding
 
 
@@ -23,10 +22,7 @@ class ropen(object):
         self.errors = errors if errors else "strict"
         self.newline = newline
 
-        kwargs = {}
-        if sys.version_info[0] >= 3:
-            kwargs["closefd"] = closefd
-        self.fileobject = open(filename, "rb", buffering=bufsize, **kwargs)
+        self.fileobject = open(filename, "rb", buffering=bufsize, closefd=closefd)
 
         self.fileobject.seek(0, 2)  # Go to end of file
         self.buf = b""
@@ -49,8 +45,6 @@ class ropen(object):
             next_line = next_line.replace(b"\r\n", b"\n")
             next_line = next_line.replace(b"\r", b"\n")
         return next_line.decode(self.encoding, self.errors)
-
-    next = __next__  # Python 2 compatibility
 
     def readline(self):
         try:
